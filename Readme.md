@@ -1,5 +1,5 @@
 # SchoolManagement-Django
-Blogpost is a entry level Django web app for beginners 
+SchoolManagement is a entry level Django web app for beginners which uses class based views and inline forms
 
 ## Features
 - A brief depiction of students and teachers
