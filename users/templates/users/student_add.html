@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Add Student | 123Schools
+{% endblock title %}
+
+{% block content %}
+{% if posts %}
+Vacant posts:
+{%for post in posts%}
+{{post}},
+{% endfor%}
+{% endif %}
+<div class="container card" style="padding: 10px 10px 10px 10px;width: 50%;margin-top: 10px;">
+    <h5 style="text-align: center;">
+    {% if not page %}
+        Sign up
+    {% else %}
+        Contact Details
+    {% endif %}
+    </h5>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% for field in form %}
+    {% csrf_token %}
+    <div class="form-group" style="padding-top: 5px;">
+        <label>{{field.label}}</label>
+        {{field}}
+        {{field.errors}}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Submit" class="btn btn-dark" style="margin-top: 10px;align-self: center;" >
+</form>
+</div>
+
+{% endblock content %}

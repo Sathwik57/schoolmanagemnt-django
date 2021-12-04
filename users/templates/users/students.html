@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load filtags %}
+{% block title %}
+Students | 123Schools
+{% endblock title %}
+
+{% block content %}
+<br />
+{% if page == 'teacher' %}
+<h4>Teachers</h4>
+{% else %}
+<h4>Students</h4>
+{% endif %}
+<hr />
+<div class="container">
+    {% for student in students%}
+    <div class="card" style="width: 40%; margin-top: 20px; padding: 10px">
+        <div class='card-title'>{{student.user.first_name}} {{student.user.last_name}}</div>
+        {% if page == 'teacher' %}
+        
+            <div class="card-subtitle">Subject: {{student.sub}}</div>
+            <div class="card-body">
+                Contacts:
+                <p>Ph: {{student.contact_no}}</p>
+                {% is_user student.user.username as hi %}
+                {% if hi %}
+                <a href="{% url 'delete-teacher' student.user.id %}">Delete</a>
+                {% endif %}
+                
+        {% else %}
+            <div class="card-subtitle">Class: {{student.std}}</div>
+            <div class="card-body">
+                <label><strong>Contacts:</strong></p>
+                <p>Parent/Guardian: {{student.guardian}}</p>
+                <p>Contact No: {{student.contact_no}}</p>
+                <p>Address: {{student.address}}</p>
+                {% is_user student.user.username as hi %}
+                {% if hi %}
+
+                <a href="{% url 'update-student' student.user.id %}">Update</a>
+                
+                <a href="{% url 'delete-student' student.user.id %}">Delete</a>
+                {% endif %}
+                {% if not request.user.is_student%}
+                <a href="{% url 'results' student.id %}">View all results</a>
+                {% endif %}
+        {% endif %}
+        </div>
+    </div>
+    {% endfor%}
+</div>
+
+{% endblock content %}

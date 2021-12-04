@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Student Details | 123Schools
+{% endblock title %}
+
+{% block content %}
+
+<div class="container card" style="padding: 10px 10px 10px 10px;width: 50%;margin-top: 10px;">
+    <h5 style="text-align: center;">Sign up</h5>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in teacher_form %}
+    <div class="form-group" style="padding-top: 5px;">
+        <label>{{field.label}}</label>
+        {{field}}
+        {{field.errors}}
+    </div>
+    {% endfor %}
+
+  {% for field in contact_form %}
+    <div class="form-group" style="padding-top: 5px;">
+        <label>{{field.label}}</label>
+        {{field}}
+        {{field.errors}}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Submit" class="btn btn-dark" style="margin-top: 10px;align-self: center;" >
+</form>
+</div>
+
+{% endblock content %}

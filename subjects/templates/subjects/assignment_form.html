@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container mt-5" style="text-align: center;">
+    <a href="{% url 'quiz'%}"  class="nav-link text-secondary"
+    style="text-decoration: none; margin-right: 130px;">&#5193;Back</a>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Modify" class="btn btn-dark btn-md">
+    </form>
+    <br/>
+    <a href="{% url 'assignment-update' obj.id %}" 
+    class="nav-link"
+    style="text-decoration: none;">Update Questions</a>
+</div>
+
+{% endblock content %}

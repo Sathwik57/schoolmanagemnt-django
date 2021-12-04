@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% block content%}
+<div class="container border mt-5 p-5" style="text-align: center; width: 50%;">
+    <h5>Sign up as </h5>
+    <br/>
+<a href="{% url 'add-student'%}"style="text-decoration: none;">
+<button class="btn btn-outline-dark"> Student </button>
+</a>
+<a href="{% url 'add-teacher'%}" style="text-decoration: none;">
+    <button class="btn btn-secondary"> Teacher </button>
+</a>
+</div>
+{% endblock content%}

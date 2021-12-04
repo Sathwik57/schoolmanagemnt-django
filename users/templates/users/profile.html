@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load filtags %}
+{% block title %}
+Students | 123Schools
+{% endblock title %}
+
+{% block content %}
+<br />
+<h4>User Profile</h4>
+<hr />
+<div class="container border p-4">
+        <img src="{{object.profile_image.url}}" style="width: 18%; float: left; padding-top: 40px;">
+        <h4>{{object.first_name}} {{object.last_name}} 
+            {% if object.is_student %}
+            <a href="{% url 'update-student' object.id%}" style="font-size: 15px; margin-left: 10px;">
+                Edit</a>
+            {%else%}
+            <a href="{% url 'update-teacher' object.id%}" style="font-size: 15px; margin-left: 10px;">
+                Edit</a>
+            {% endif %}
+        </h4>
+        <hr/>
+
+        <p for="text">First Name: {{object.first_name}} </p>
+        <p for="text">Last Name: {{object.last_name}} </p>
+        <p for="text">Username: {{object.username}} </p>
+        <p for="text">Email: {{object.email}} </p>
+        {% if object.is_student %}
+            <p >Class: {{object.student.std}} Std</p>
+            <p >RollNo: {{object.student.rollno}}</p>
+        {% else %}
+            <p >Subject: {{object.teacher.sub}}</p>
+        {% endif %}
+        <br/>
+        <hr style="border-style: dotted; width: 30%; margin-left: 500px;"/>
+        <br/>
+        <h5>Contact details 
+            <a href="{% url 'update-student' object.id%}" style="font-size: 15px; margin-left: 10px;">
+                Edit</a>
+        </h5>
+        {% if object.is_student %}
+        <p for="text">Guardian: {{object.student.guardian}} </p>
+        <p for="text">Contact: {{object.student.contact_no}} </p>
+        <p for="text">Address: {{object.student.address}} </p>
+        {% else %}
+        <p for="text">Contact: {{object.teacher.contact_no}} </p>
+        <p for="text">Address: {{object.student.address}} </p>
+        {% endif %}
+
+</div>
+
+{% endblock content %}

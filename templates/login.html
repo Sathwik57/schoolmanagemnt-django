@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block content%}
+<form method="post">
+    <div class="container mt-5" style="width: 30%;border: groove;padding: 10px 20px 20px 30px;;" >
+        <h5 class="text-secondary" style="text-align: center;">Login to access</h5>
+        <br/>
+        <br/>
+        {% csrf_token %}
+        {% for field in form %}
+        {% if field.label == 'Email address'%}
+        <label class="form-label">{{field.label}}</label>
+        {%else %}
+        <label class="form-label" style="margin-right: 30px;">{{field.label}}</label>
+        {% endif %}
+        : {{field}}
+        {{field.errors}}
+        <br>
+        <br>
+        {% endfor %}
+        {% if form.errors%}
+        {{form.non_field_errors}}
+        {% endif %}
+        <p style="margin-top: 0px;">
+            <button type="submit" class="btn btn-secondary" style="margin-left: 180px; margin-top: 10px;">Login</button>
+        </p>
+        <a href="{% url 'reset_password'%}" class="link-secondary" style="text-decoration: none;">Forgot Password..Reset</a>
+        <a href="{% url 'signup'%}" class="link-secondary" style="margin-left: 150px;text-decoration: none;">Signup</a>
+    </div>
+</form>
+{% endblock content %}

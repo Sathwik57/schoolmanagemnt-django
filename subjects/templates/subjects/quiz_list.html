@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load filtags %}
+{% block title %}
+Home | 123Schools
+{% endblock title %}
+
+{% block content %}
+{% if not request.user.is_student%}
+<a href="{% url 'add-assignment'%}" style="text-decoration: none;width: 40%;">Add assignment</a>
+{% endif %}
+<div class="container">
+    {% if object_list%}
+    {% for quiz in object_list%}
+    <div class="card col-5 p-3 mt-3">
+        <h5>{{quiz.title}}</h5>
+        <p>Subject: {{quiz.sub.teacher.sub}}</p>
+        <label>Author: {{quiz.sub.username.title}}</label>
+
+        {% if request.user.is_student%}
+        {% is_graded quiz as grade %}
+        {% if grade%}
+        <label>Grade: {{grade}}</label>
+        <hr />
+        {% else%}
+        <hr />
+        <a href="{% url 'take-quiz' quiz.id%}" style="text-decoration: none;width: 40%;">Take Test</a>
+        {% endif %}
+        {% else %}
+        <hr />
+        <a href="{% url 'assignment-detail' quiz.id%}" style="text-decoration: none;width: 40%;">View</a>
+            {% if request.user == quiz.sub%}
+            <a href="{% url 'assignment-update' quiz.id%}" style="text-decoration: none;width: 40%;">Update</a>
+            <a href="{% url 'assignment-delete' quiz.id%}" style="text-decoration: none;width: 40%;">Delete</a>
+            {% endif %}
+        {% endif %}
+
+    </div>
+    {% endfor %}
+    {% else %}
+    {% if not request.user.is_student%}
+    No assignments to show
+    <a href="{% url 'add-assignment'%}" style="text-decoration: none;width: 40%;">Add Assigment</a>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

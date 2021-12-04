@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="container">
+    <label style="font-size: 1.5rem;"><strong>{{title}}</strong></label>
+    <hr/>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.management_form }}
+    {% for f in form %}
+
+    {% for field in f %}
+    
+    {% if not field.label == 'Id' %}
+    {{field.label}}
+    <span style="padding-right: 20px; padding-bottom: 10px">{{field}}</span>
+    {{field.errors}}
+    {{f.errors}}
+    {% endif %}
+    {% endfor %}
+    <hr/>
+    {% endfor %}
+    <input type="submit" value="submit">
+</form>
+
+</div>
+
+{% endblock content %}

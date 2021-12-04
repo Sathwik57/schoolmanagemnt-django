@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Students | 123Schools
+{% endblock title %}
+
+{% block content %}
+<br />
+<h3>Assignment {{object.id}}</h3>
+{%if request.user == object.sub %}
+<a href="{% url 'ques-update' object.id%}" style="text-decoration: none;">
+    <button class="btn btn-outline-dark btn-sm">Update</button>
+</a>
+<a href="{% url 'assignment-update' object.id%}" style="text-decoration: none;">
+    <button class="btn btn-outline-danger btn-sm">Delete</button>
+</a>
+{% endif %}
+<hr />
+<div class="container">
+    <h4 style="float: left;">{{object}}</h4>
+    <a href="{% url 'assignment-update' object.id%}" class="link-secondary"
+        style="text-decoration: none; padding-left: 10px;">Change title</a>
+    <br />
+    <br />
+    {%if request.user == object.sub %}
+    <a href="{% url 'ques-update' object.id%}" class="link-info mt-2" style="text-decoration: none;">Add Ques</a>
+    {% endif %}
+    <div class="row">
+        {% for ques in object.test.all %}
+        <div class="card col-3 mx-3 mt-3">
+            <strong>{{ques}}</strong>
+            <ul>
+                <li>
+                    {{ques.option1}}
+                </li>
+                <li>
+                    {{ques.option2}}
+                </li>
+                <li>
+                    {{ques.option3}}
+                </li>
+                <li>
+                    {{ques.option4}}
+                </li>
+            </ul>
+            {%if request.user == object.sub %}
+            <a href="{% url 'ques-delete' ques.id%}" class="link-danger"
+            style="text-decoration: none; padding-left: 10px;">Del Ques</a>  
+            {% endif %}          
+        </div>
+        {% endfor %}
+    </div>
+    {%if request.user == object.sub %}
+    <a href="{% url 'assignment-update' object.id%}" class="link-info mt-2"
+        style="text-decoration: none; padding-left: 10px;">Add Ques</a>
+    {% endif %}
+</div>
+
+{% endblock content %}

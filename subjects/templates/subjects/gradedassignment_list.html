@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | 123Schools
+{% endblock title %}
+
+{% block content %}
+<h5>Student Grades</h5>
+<hr/>
+<div class="container">
+    {% for quiz in object_list%}
+    <div class="card col-5 p-3 mt-3">
+        <h5>{{quiz.assignment}}</h5>
+        <p>Student-rollno: {{quiz.student.user.username}}-{{quiz.student.rollno}}</p>
+        <label>Grade: {{quiz.grade}}</label>
+        <p>Subject: {{quiz.assignment.sub.teacher.sub}}({{quiz.assignment.sub.username}})</p>
+        <label>Author: {{quiz.assignment.sub.username.title}}</label>
+        <a href="{% url 'quiz-result' quiz.id%}">View</a>
+    </div>
+    
+    {% endfor %}
+</div>
+{% endblock content %}
