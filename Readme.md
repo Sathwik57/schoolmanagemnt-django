@@ -1,4 +1,4 @@
-# SchoolManagement-Django
+# SchoolSystemManagement-Django
 SchoolManagement is a entry level Django web app for beginners which uses class based views and inline forms
 
 ## Features
